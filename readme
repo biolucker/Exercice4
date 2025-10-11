@@ -79,6 +79,14 @@ Al iniciar la applicacion se muestra un menu de opciones segun la operacion que 
     Para hacer
 ------------------------------------------------------------------------------------------------------------------------
 
+Recordar que se vale todo, crear clases, agruparlas en carpetas, poner funciones dentro de main
+lo que mas importa es lograr lo que se necesita o lo que se requiere en cada punto, la clase main siempre comenzara
+la applicacion, pero como se ejecute de momento no importa, recomiendo hacer una clase aparte para el menu,
+que controle el menu, lea la opcion y llame al metodo que ejecuta o implementa esa opcion
+cada opcion tenerla tambien en una clase aparte, clase Venta, AgregarProducto, ListarProductos, PagarOrden y asi...
+acualquier duda me pegas un grito, si te tardas mas de 20min, no te quemes y preguntame, o en su defecto a chatgpt
+pero a veces se tira pelones, primero ven a mi jajajajaja.
+
 a- Hacer el menu de opciones:
 
     - crear el menu para poder navegar entre las opciones disponibles
