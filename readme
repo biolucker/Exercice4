@@ -1,6 +1,6 @@
-------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
     Kiosko
-------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 Al iniciar la applicacion se muestra un menu de opciones segun la operacion que quiere realizar el usuario
 
         1. Agregar productos al kiosko
@@ -55,9 +55,9 @@ Al iniciar la applicacion se muestra un menu de opciones segun la operacion que 
             (Listado de ventas con toda la informacion)
 
         6. Salir
-------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
     Entidades:
-------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 - Productos
 
@@ -75,14 +75,15 @@ Al iniciar la applicacion se muestra un menu de opciones segun la operacion que 
     metodo de pago
     fecha y hora
 
-------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
     Para hacer
-------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 a- Hacer el menu de opciones:
 
     - crear el menu para poder navegar entre las opciones disponibles
-    - al momento de leer la opcion, mostrar un mensaje como: 3. Pagar pedido se encuentra en construccion, si no esta implementada
+    - al momento de leer la opcion, mostrar un mensaje como: 3. Pagar pedido se encuentra en construccion,
+      si no esta implementada
     - se debe volver al menu anterior y volver a mostrar la lista de opciones
     - mover la logica actual a la opcion "2. ordenar productos" para lograr usar el nuevo menu de opciones
     - la funcion de (listar productos disponibles) aun no se tomara en cuenta
@@ -103,9 +104,9 @@ b- Crear entidad producto
 
     - actualizar la opcion "2. ordenar productos" para ahora leer los productos y dejar los que tengan disponibles
 
-------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
     (avisar cuando se llegue a este punto para seguir con el siguiente modulo)
-------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 c- añadir productos nuevos y existentes
 d- pagar pedido, segun los comentarios anteriores
