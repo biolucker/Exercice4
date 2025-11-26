@@ -1,0 +1,131 @@
+------------------------------------------------------------------------------------------------------------------------
+    Kiosko
+------------------------------------------------------------------------------------------------------------------------
+Al iniciar la applicacion se muestra un menu de opciones segun la operacion que quiere realizar el usuario
+
+        1. Agregar productos al kiosko
+
+            1- Nuevo
+               ingresar nombre
+               ingresar cantidad
+               ingresar precio
+               fecha y hora
+            2- Existente
+               (listar productos)
+               ingresar seleccion de producto
+               ingresar cantidad
+               fecha y hora
+
+        2. Ordenar productos
+            (listar productos disponibles) // no listar los que no tengan existencia
+            (opcion para pedirlos)
+            (opcion para ingresar cantidad)
+            (opcion para añadir otro o terminar orden para pagar)
+
+        3. Pagar pedido
+            (Resumen del pedido)
+            fecha y hora
+            --------------------------
+            hamburgesas pollo x3 $1500
+            gaseosa cocacola  x3 $900
+            papas             x3 $450
+            --------------------------
+            Subtotal:
+            IVA:
+            Total:
+            --------------------------
+            Tipo de pago
+
+            1- Efectivo
+            2- Tarjeta debito
+                1- VISA
+                2- MASTER
+            3- Mercado pago
+            4- Tarjeta credito
+                1- AMEX
+                2- VISA
+                3- MASTER
+            (registrar venta con toda la info anterior)
+
+        4. Mostrar productos
+            1. Productos registrados
+            2. Productos disponibles
+
+        5. Mostrar ventas
+            (Listado de ventas con toda la informacion)
+
+        6. Salir
+------------------------------------------------------------------------------------------------------------------------
+    Entidades:
+------------------------------------------------------------------------------------------------------------------------
+
+- Productos
+
+    nombre
+    precio
+    stock (existencia, disponibles)
+    fecha y hora // siempre que se crea o añada un producto se actualiza la hora actual
+
+- Ventas
+
+    listado de productos seleccionados con nombre, cantidad, precio,
+    subtotal
+    iva
+    total
+    metodo de pago
+    fecha y hora
+
+------------------------------------------------------------------------------------------------------------------------
+    Para hacer
+------------------------------------------------------------------------------------------------------------------------
+
+Recordar que se vale todo, crear clases, agruparlas en carpetas, poner funciones dentro de main
+lo que mas importa es lograr lo que se necesita o lo que se requiere en cada punto, la clase main siempre comenzara
+la applicacion, pero como se ejecute de momento no importa, recomiendo hacer una clase aparte para el menu,
+que controle el menu, lea la opcion y llame al metodo que ejecuta o implementa esa opcion
+cada opcion tenerla tambien en una clase aparte, clase Venta, AgregarProducto, ListarProductos, PagarOrden y asi...
+acualquier duda me pegas un grito, si te tardas mas de 20min, no te quemes y preguntame, o en su defecto a chatgpt
+pero a veces se tira pelones, primero ven a mi jajajajaja.
+
+a- Hacer el menu de opciones:
+
+    - crear el menu para poder navegar entre las opciones disponibles
+    - al momento de leer la opcion, mostrar un mensaje como: 3. Pagar pedido se encuentra en construccion,
+      si no esta implementada
+    - se debe volver al menu anterior y volver a mostrar la lista de opciones
+    - mover la logica actual a la opcion "2. ordenar productos" para lograr usar el nuevo menu de opciones
+    - la funcion de (listar productos disponibles) aun no se tomara en cuenta
+
+b- Crear entidad producto
+    - crear la nueva entidad
+    - añadirle el metodo setDateTimeNow() que tomara la fecha y hora actual al momento que se use
+    - dejar unos productos cargados para tenerlos de ejemplo
+        algo como:
+          List<Menu> menu = new ArrayList<>();
+                menu.add(new Menu(1, "Hamburguesa", 500.0));
+                menu.add(new Menu(2, "Papas", 250.0));
+                menu.add(new Menu(3, "Gaseosa", 100.0));
+                menu.add(new Menu(4, "Helado", 200.0));
+                menu.add(new Menu(5, "Jugo", 100.0));
+                menu.add(new Menu(6, "Pollo", 100.0));}
+        que existe actualmente cada vez que inicia la applicacion, y luego se puede actualizar
+
+    - actualizar la opcion "2. ordenar productos" para ahora leer los productos y dejar los que tengan disponibles
+
+------------------------------------------------------------------------------------------------------------------------
+    (avisar cuando se llegue a este punto para seguir con el siguiente modulo)
+------------------------------------------------------------------------------------------------------------------------
+
+c- añadir productos nuevos y existentes
+d- pagar pedido, segun los comentarios anteriores
+    mostrar listado de productos y cantidades
+    fecha y hora
+    ingresar tipo pago
+e- mostrar productos
+    1. Productos registrados
+    2. Productos disponibles
+f- mostrar listado de ventas hechas
+    mostrar al final de la lista, el total de ganancia registrada.
+
+
+

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+
     public static void main(String[] args) {
 
         List<Menu> menu = new ArrayList<>();
@@ -22,10 +23,10 @@ public class Main {
 
         List<String> resumen = new ArrayList<>();
         double subtotal = 0.0;
-
         boolean continuar = true;
 
         while (continuar) {
+
             printer.printMenu(menu);
             System.out.println("Inserte la ID del producto que desea comprar: ");
             int id = reader.readInt();
@@ -45,10 +46,8 @@ public class Main {
                 int cantidad = reader.readInt();
                 double totalItem = calculadora.multiplicar(seleccionado.getPrecio(), cantidad);
                 subtotal = calculadora.suma(subtotal, totalItem);
-
                 resumen.add(seleccionado.getNombre() + " x" + cantidad + " = $" + totalItem);
             }
-
             System.out.println("¿Desea agregar otro producto? (s/n): ");
             String respuesta = reader.readString();
             if (!respuesta.equalsIgnoreCase("s")) {
