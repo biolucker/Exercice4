@@ -1,7 +1,4 @@
-//hacer para poder seleccionar multiples productos con multiples cantidades
-//poner mas productos en el menu
-//Imprimir factura de toda la compra (cantidades y total) y dar 5% de propina y el IVA del 10%
-//el IVA debe ser una variable global configurada antes de iniciar el programa
+
 import java.util.ArrayList;
 import java.util.List;
 
