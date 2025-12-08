@@ -101,13 +101,13 @@ b- Crear entidad producto
     - añadirle el metodo setDateTimeNow() que tomara la fecha y hora actual al momento que se use
     - dejar unos productos cargados para tenerlos de ejemplo
         algo como:
-          List<Menu> menu = new ArrayList<>();
-                menu.add(new Menu(1, "Hamburguesa", 500.0));
-                menu.add(new Menu(2, "Papas", 250.0));
-                menu.add(new Menu(3, "Gaseosa", 100.0));
-                menu.add(new Menu(4, "Helado", 200.0));
-                menu.add(new Menu(5, "Jugo", 100.0));
-                menu.add(new Menu(6, "Pollo", 100.0));}
+          List<entity.Menu> menu = new ArrayList<>();
+                menu.add(new entity.Menu(1, "Hamburguesa", 500.0));
+                menu.add(new entity.Menu(2, "Papas", 250.0));
+                menu.add(new entity.Menu(3, "Gaseosa", 100.0));
+                menu.add(new entity.Menu(4, "Helado", 200.0));
+                menu.add(new entity.Menu(5, "Jugo", 100.0));
+                menu.add(new entity.Menu(6, "Pollo", 100.0));}
         que existe actualmente cada vez que inicia la applicacion, y luego se puede actualizar
 
     - actualizar la opcion "2. ordenar productos" para ahora leer los productos y dejar los que tengan disponibles

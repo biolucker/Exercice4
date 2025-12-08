@@ -1,3 +1,5 @@
+package utils;
+
 public class Calculadora {
     public Calculadora(){}
     public double suma(double a, double b) {

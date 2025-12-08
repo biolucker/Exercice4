@@ -1,3 +1,7 @@
+package utils;
+
+import entity.Menu;
+
 import java.util.List;
 
 public class Printer {
