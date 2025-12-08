@@ -1,14 +1,12 @@
-import java.time.LocalDateTime;
-
 import entity.Menu;
 import entity.Product;
 import utils.Calculadora;
 import utils.Printer;
 import utils.Reader;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
 
 public class Main {
 
@@ -22,120 +20,204 @@ public class Main {
         menu.add(new Menu(5, "Jugo", 100.0));
         menu.add(new Menu(6, "Pollo", 100.0));
 
+        /*
+        List<Product> productList = new ArrayList<>();
+        productList.add(new Product("Hamburguesa", 500  ));
+        productList.add(new Product("Hamburguesa", 500  ));
+        productList.add(new Product("Hamburguesa", 500  ));
+        productList.add(new Product("Hamburguesa", 500  ));
+        productList.add(new Product("Hamburguesa", 500  ));
+        productList.add(new Product("Hamburguesa", 500  ));
+        productList.add(new Product("Hamburguesa", 500  ));
+        productList.add(new Product("Hamburguesa", 500  ));
+        productList.add(new Product("Hamburguesa", 500  ));
+
+         */
+
         Printer printer = new Printer();
         Calculadora calculadora = new Calculadora();
         Reader reader = new Reader();
+        InventoryManager inventory = new InventoryManager();
 
-        // NUEVO — INVENTARIO
-        InventoryManager inventoryManager = new InventoryManager();
+        boolean appRunning = true;
 
-        // ================================
-        // PRE-PAYMENT MENU
-        // ================================
-        boolean preMenuActive = true;
+        while (appRunning) {
 
-        while (preMenuActive) {
             System.out.println("\n===== MENU PRINCIPAL =====");
-            System.out.println("1. Agregar producto a la tienda");
-            System.out.println("2. Ver inventario");
-            System.out.println("3. Continuar a comprar del menú");
-            System.out.println("Seleccione una opción: ");
+            System.out.println("1. Agregar productos al kiosko");
+            System.out.println("2. Venta de productos (En construcción)");
+            System.out.println("3. Pagar pedido (En construcción)");
+            System.out.println("4. Mostrar productos (En construcción)");
+            System.out.println("5. Mostrar ventas (En construcción)");
+            System.out.println("6. Salir");
+            System.out.print("Seleccione una opción: ");
 
-            int option = reader.readInt();
+            int op = reader.readInt();
 
-            switch (option) {
+            switch (op) {
                 case 1:
-                    System.out.println("Ingrese nombre del producto:");
-                    String name = reader.readString();
-
-                    System.out.println("Ingrese cantidad:");
-                    int qty = reader.readInt();
-
-                    System.out.println("Ingrese precio:");
-                    double price = reader.readDouble();
-
-                    Product p = new Product(name, qty, price, LocalDateTime.now());
-                    inventoryManager.addProduct(p);
-
-                    System.out.println("Producto agregado exitosamente.");
+                    agregarProductosKiosko(reader, inventory);
                     break;
 
                 case 2:
-                    System.out.println("\n===== INVENTARIO =====");
-                    if (inventoryManager.getInventory().isEmpty()) {
-                        System.out.println("No hay productos almacenados.");
-                    } else {
-                        for (Product prod : inventoryManager.getInventory()) {
-                            System.out.println(prod);
-                        }
-                    }
+                    ventaProductosMockup(menu, reader);
                     break;
 
                 case 3:
-                    preMenuActive = false;
+                    pagarPedidoMockup();
+                    break;
+
+                case 4:
+                    mostrarProductosMockup(inventory, reader);
+                    break;
+
+                case 5:
+                    mostrarVentasMockup();
+                    break;
+
+                case 6:
+                    appRunning = false;
                     break;
 
                 default:
                     System.out.println("Opción inválida.");
-            }
-        }
-
-        // ================================
-        // EXISTING PURCHASE SYSTEM
-        // ================================
-
-        double ivaPorcentaje = 10.0;
-        double propinaPorcentaje = 5.0;
-
-        List<String> resumen = new ArrayList<>();
-        double subtotal = 0.0;
-        boolean continuar = true;
-
-        while (continuar) {
-
-            printer.printMenu(menu);
-            System.out.println("Inserte la ID del producto que desea comprar: ");
-            int id = reader.readInt();
-
-            Menu seleccionado = null;
-            for (Menu item : menu) {
-                if (item.getId() == id) {
-                    seleccionado = item;
                     break;
-                }
-            }
-
-            if (seleccionado == null) {
-                System.out.println("El producto seleccionado no existe.");
-            } else {
-                System.out.println("Inserte la cantidad: ");
-                int cantidad = reader.readInt();
-                double totalItem = calculadora.multiplicar(seleccionado.getPrecio(), cantidad);
-                subtotal = calculadora.suma(subtotal, totalItem);
-
-                resumen.add(seleccionado.getNombre() + " x" + cantidad + " = $" + totalItem);
-            }
-
-            System.out.println("¿Desea agregar otro producto? (s/n): ");
-            String respuesta = reader.readString();
-            if (!respuesta.equalsIgnoreCase("s")) {
-                continuar = false;
             }
         }
+    }
 
-        double iva = subtotal * (ivaPorcentaje / 100);
-        double propina = subtotal * (propinaPorcentaje / 100);
-        double totalFinal = subtotal + iva + propina;
+    // ==============================================================
+    // 1. AGREGAR PRODUCTOS AL KIOSKO (WITH YOUR CURRENT FUNCTIONALITY)
+    // ==============================================================
 
-        System.out.println("\n--- RESUMEN DE COMPRA ---");
-        for (String linea : resumen) {
-            System.out.println(linea);
+    private static void agregarProductosKiosko(Reader reader, InventoryManager inventory) {
+
+        boolean submenu = true;
+        while (submenu) {
+            System.out.println("\n--- Agregar productos al kiosko ---");
+            System.out.println("1. Nuevo");
+            System.out.println("2. Existente");
+            System.out.println("3. Volver");
+            System.out.print("Seleccione una opción: ");
+
+            int op = reader.readInt();
+
+            switch (op) {
+                case 1: // NUEVO PRODUCTO (Already working)
+                    System.out.println("Ingrese nombre del producto:");
+                    String name = reader.readString();
+
+                    System.out.println("Ingrese precio:");
+                    double price = reader.readDouble();
+
+                    Product p = new Product(name, price, LocalDateTime.now());
+                    inventory.addProduct(p);
+
+                    System.out.println("Producto agregado correctamente.");
+                    break;
+
+                case 2: // EXISTENTE (Mockup only)
+                    System.out.println("\n--- Productos existentes ---");
+                    if (inventory.getInventory().isEmpty()) {
+                        System.out.println("No hay productos registrados.");
+                    } else {
+                        int index = 1;
+                        for (Product prod : inventory.getInventory()) {
+                            System.out.println(index + ". " + prod);
+                            index++;
+                        }
+                    }
+
+                    System.out.println("\n*** En construcción *** (Aquí seleccionar producto y agregar cantidad)");
+                    break;
+
+                case 3:
+                    submenu = false;
+                    break;
+
+                default:
+                    System.out.println("Opción inválida.");
+                    break;
+            }
+        }
+    }
+
+    // ==============================================================
+    // 2. VENTA DE PRODUCTOS (Mockup only)
+    // ==============================================================
+
+    private static void ventaProductosMockup(List<Menu> menu, Reader reader) {
+
+        System.out.println("\n--- Venta de productos (En construcción) ---");
+        System.out.println("Productos disponibles:");
+
+        for (Menu m : menu) {
+            System.out.println(m);
         }
 
-        System.out.println("----------------------------");
-        System.out.println("Subtotal: $" + subtotal);
-        System.out.println("IVA (" + ivaPorcentaje + "%): $" + iva);
-        System.out.println("Propina (" + propinaPorcentaje + "%): $" + propina);
-        printer.printTotal(totalFinal);
+        System.out.println("\n(Opción para pedir productos vendrá aquí)");
+        System.out.println("(Opción para ingresar cantidad)");
+        System.out.println("(Opción para añadir otro o terminar orden)\n");
+
+        System.out.println("*** Funcionalidad en construcción ***");
+    }
+
+    // ==============================================================
+    // 3. PAGAR PEDIDO (Mockup only)
+    // ==============================================================
+
+    private static void pagarPedidoMockup() {
+        System.out.println("\n--- Pagar pedido (En construcción) ---");
+
+        System.out.println("Resumen del pedido:");
+        System.out.println("--------------------------");
+        System.out.println("hamburguesas pollo x3 $1500");
+        System.out.println("gaseosa cocacola  x3 $900");
+        System.out.println("papas             x3 $450");
+        System.out.println("--------------------------");
+        System.out.println("Subtotal:");
+        System.out.println("IVA:");
+        System.out.println("Total:");
+        System.out.println("--------------------------");
+
+        System.out.println("Tipo de pago");
+        System.out.println("* Efectivo");
+        System.out.println("* Tarjeta débito");
+        System.out.println("   1- VISA");
+        System.out.println("   2- MASTER");
+        System.out.println("* Mercado Pago");
+        System.out.println("* Tarjeta crédito");
+        System.out.println("   1- AMEX");
+        System.out.println("   2- VISA");
+        System.out.println("   3- MASTER");
+
+        System.out.println("\n*** Funcionalidad en construcción ***");
+    }
+
+    // ==============================================================
+    // 4. MOSTRAR PRODUCTOS (Mockup only)
+    // ==============================================================
+
+    private static void mostrarProductosMockup(InventoryManager inventory, Reader reader) {
+        System.out.println("\n--- Mostrar productos ---");
+        System.out.println("1. Productos registrados");
+        System.out.println("2. Productos disponibles");
+        System.out.println("3. Volver");
+
+        System.out.println("\n*** En construcción ***");
+
+        System.out.println("\nProductos registrados:");
+        for (Product p : inventory.getInventory()) {
+            System.out.println(p);
+        }
+    }
+
+    // ==============================================================
+    // 5. MOSTRAR VENTAS (Mockup only)
+    // ==============================================================
+
+    private static void mostrarVentasMockup() {
+        System.out.println("\n--- Mostrar ventas (En construcción) ---");
+        System.out.println("(Listado de ventas vendrá aquí)");
     }
 }
