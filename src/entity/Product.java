@@ -9,7 +9,7 @@ public class Product {
     private double price;
     private LocalDateTime date;
 
-    //private List <entidades.Product> products;
+    //private List <Product> products;
     public Product(String name, int quantity, double price, LocalDateTime date) {
         this.name = name;
         this.quantity = quantity;
@@ -43,9 +43,9 @@ public class Product {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return "entidades.Product [name=" + name +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                ", date=" + date.format(formatter) + "]";
+        return "Product [Name = " + name +
+                ", Quantity = " + quantity +
+                ", Price = $" + price +
+                ", Date = " + date.format(formatter) + "]";
     }
 }
