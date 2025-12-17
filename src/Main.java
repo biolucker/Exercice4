@@ -223,30 +223,55 @@ public class Main {
 
     private static void agregarStock(Reader reader) {
 
-        System.out.println("\n--- Agregar Stock ---");
+        boolean submenu = true;
 
-        int index = 1;
-        for (Product p : Stock.getRegisteredProducts()) {
-            System.out.println(index + ". " + p.getName());
-            index++;
+        while (submenu) {
+            System.out.println("\n--- Agregar Stock ---");
+            System.out.println("1. Seleccionar producto");
+            System.out.println("2. Agregar productos Aleatorios");
+            System.out.println("3. Volver");
+            System.out.print("Seleccione: ");
+
+            int op = reader.readInt();
+
+            switch (op) {
+                case 1:
+                    int index = 1;
+                    for (Product p : Stock.getRegisteredProducts()) {
+                        System.out.println(index + ". " + p.getName());
+                        index++;
+                    }
+
+                    System.out.print("Seleccione producto: ");
+                    int choice = reader.readInt();
+
+                    if (choice < 1 || choice > Stock.getRegisteredProducts().size()) {
+                        System.out.println("Selección inválida.");
+                        break;
+                    }
+
+                    Product selected = Stock.getRegisteredProducts().get(choice - 1);
+
+                    System.out.print("Ingrese cantidad: ");
+                    int qty = reader.readInt();
+
+                    Stock.addStock(selected, qty);
+
+                    System.out.println("Stock agregado correctamente.");
+                    break;
+
+                case 2:
+                    Stock.addRandomStockToAllProducts();
+                    break;
+
+                case 3:
+                    submenu = false;
+                    break;
+
+                default:
+                    System.out.println("Opción inválida.");
+            }
         }
-
-        System.out.print("Seleccione producto: ");
-        int choice = reader.readInt();
-
-        if (choice < 1 || choice > Stock.getRegisteredProducts().size()) {
-            System.out.println("Selección inválida.");
-            return;
-        }
-
-        Product selected = Stock.getRegisteredProducts().get(choice - 1);
-
-        System.out.print("Ingrese cantidad: ");
-        int qty = reader.readInt();
-
-        Stock.addStock(selected, qty);
-
-        System.out.println("Stock agregado correctamente.");
     }
 
     // ==============================================================

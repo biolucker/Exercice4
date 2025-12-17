@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.ThreadLocalRandom;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,19 @@ public class Stock {
     public void addQuantity(int qty) {
         this.quantity += qty;
         this.lastUpdate = LocalDateTime.now();
+    }
+
+    public static void addRandomStockToAllProducts() {
+
+        for (Product p : registeredProducts) {
+            int randomQty = ThreadLocalRandom.current().nextInt(0, 7);
+
+            if (randomQty > 0) {
+                addStock(p, randomQty);
+            }
+        }
+
+        System.out.println("Stock aleatorio agregado a los productos.");
     }
 
     // ===============================
