@@ -4,6 +4,8 @@ import entity.Stock;
 import utils.Calculadora;
 import utils.Printer;
 import utils.Reader;
+import entity.Sell;
+import entity.SellItem;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -54,7 +56,7 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println("\n--- Venta (Mockup) ---");
+                    ventaProductos(reader);
                     break;
 
                 case 3:
@@ -66,7 +68,9 @@ public class Main {
                     break;
 
                 case 5:
-                    System.out.println("\n--- Ventas (Mockup) ---");
+                    for (Sell s : Sell.getSells()) {
+                        System.out.println(s);
+                    }
                     break;
 
                 case 6:
@@ -127,23 +131,73 @@ public class Main {
     }
 
     // ==============================================================
-    // 2. VENTA DE PRODUCTOS (Mockup only)
+    // 2. VENTA DE PRODUCTOS
     // ==============================================================
 
-    private static void ventaProductosMockup(List<Menu> menu, Reader reader) {
+    private static void ventaProductos(Reader reader) {
 
-        System.out.println("\n--- Venta de productos (En construcción) ---");
-        System.out.println("Productos disponibles:");
+        Sell currentSell = new Sell();
+        boolean selling = true;
 
-        for (Menu m : menu) {
-            System.out.println(m);
+        while (selling) {
+
+            System.out.println("\n--- Productos disponibles ---");
+
+            List<Stock> available = Stock.getAvailableStock();
+
+            if (available.isEmpty()) {
+                System.out.println("No hay productos con stock.");
+                return;
+            }
+
+            int index = 1;
+            for (Stock s : available) {
+                System.out.println(index + ". " +
+                        s.getProduct().getName() +
+                        " | Stock: " + s.getQuantity() +
+                        " | $" + s.getProduct().getPrice());
+                index++;
+            }
+
+            System.out.print("Seleccione producto: ");
+            int choice = reader.readInt();
+
+            if (choice < 1 || choice > available.size()) {
+                System.out.println("Selección inválida.");
+                continue;
+            }
+
+            Stock selectedStock = available.get(choice - 1);
+
+            System.out.print("Ingrese cantidad: ");
+            int qty = reader.readInt();
+
+            if (qty <= 0 || qty > selectedStock.getQuantity()) {
+                System.out.println("Cantidad inválida.");
+                continue;
+            }
+
+            // Deduct stock
+            Stock.deductStock(selectedStock.getProduct(), qty);
+
+            // Add to sell
+            currentSell.addItem(
+                    new SellItem(selectedStock.getProduct(), qty)
+            );
+
+            System.out.print("¿Agregar otro producto? (s/n): ");
+            String opt = reader.readString();
+
+            if (!opt.equalsIgnoreCase("s")) {
+                selling = false;
+            }
         }
 
-        System.out.println("\n(Opción para pedir productos vendrá aquí)");
-        System.out.println("(Opción para ingresar cantidad)");
-        System.out.println("(Opción para añadir otro o terminar orden)\n");
+        // Register sale
+        currentSell.register();
 
-        System.out.println("*** Funcionalidad en construcción ***");
+        System.out.println("\nVENTA REGISTRADA");
+        System.out.println(currentSell);
     }
 
     // ==============================================================

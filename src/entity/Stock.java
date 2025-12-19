@@ -61,6 +61,25 @@ public class Stock {
         System.out.println("Stock aleatorio agregado a los productos.");
     }
 
+    public static List<Stock> getAvailableStock() {
+        List<Stock> available = new ArrayList<>();
+        for (Stock s : stockList) {
+            if (s.quantity > 0) {
+                available.add(s);
+            }
+        }
+        return available;
+    }
+
+    public static boolean deductStock(Product product, int qty) {
+        Stock s = findStockByProduct(product);
+        if (s == null || s.quantity < qty) {
+            return false;
+        }
+        s.quantity -= qty;
+        return true;
+    }
+
     // ===============================
     // STATIC HELPERS
     // ===============================
